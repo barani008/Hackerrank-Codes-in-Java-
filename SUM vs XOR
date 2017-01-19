@@ -1,0 +1,18 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        long n = in.nextLong();
+        long count =0l;
+        BitSet bit = BitSet.valueOf(new long[]{n});
+        int bitCount = bit.previousSetBit(64)-bit.cardinality()+1;
+        count = (long)Math.pow(2d, bitCount);
+        System.out.println(count);
+    }
+}
