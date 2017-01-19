@@ -1,0 +1,48 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int tCases = in.nextInt();
+        for(int t=0;t<tCases;t++){
+            int n = in.nextInt();
+            int max =0;
+            int min = Integer.MAX_VALUE;
+            int[] arr = new int[n];
+            int lower = 0;
+            int minCount = Integer.MAX_VALUE;
+            for(int i=0;i<n;i++){
+                arr[i] = in.nextInt();
+                if(arr[i]<min)
+                    min = arr[i];
+                if(arr[i]>max)
+                    max = arr[i];
+            }
+            if(min-4>lower)
+                lower = min-4;
+            for(int i=min;i>=lower;i--){
+                int count = 0;
+                for(int j=0;j<n;j++){
+                    int diff = arr[j]-i;
+                    while(diff!=0){
+                        if(diff>=5)
+                            diff-=5;
+                        else if(diff>=2)
+                            diff-=2;
+                        else
+                            diff--;
+                        count++;                            
+                    }
+                }
+                if(count<minCount)
+                    minCount = count;
+            }
+            System.out.println(minCount);
+        }
+    }
+}
