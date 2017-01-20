@@ -1,0 +1,37 @@
+
+map<string, char> populateMap(map<string, char> m, node* root, string c){    
+    if(root->left!=NULL){
+        string str = c.c_str();
+        str.append("0");
+        m = populateMap(m, root->left, str.c_str());
+    }
+    if(root->right!=NULL){
+        string str = c.c_str();
+        str.append("1");
+        m = populateMap(m, root->right, str.c_str());
+    }
+    if(root->left == NULL && root->right==NULL){
+        m[c]=root->data;
+        //cout<<root->data<<" "<<c<<endl;
+    }
+    return m;
+}
+
+void decode_huff(node * root,string s)
+{
+    map<string , char> m;
+    string out;
+    //out.insert(0, s.substr(0,1));
+    int count = 0;
+    m = populateMap(m, root->left, "0"); 
+    m = populateMap(m, root->right, "1");
+    for(count=0;count<s.size();count++){          
+        out.append(s.substr(count, 1));
+        //cout<<out<<endl; 
+        map<string, char>::iterator it = m.find(out);
+        if(it != m.end()){
+            cout<<(*it).second;
+            out="";
+        }               
+    }
+}
