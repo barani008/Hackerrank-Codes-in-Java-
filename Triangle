@@ -1,0 +1,26 @@
+public class Solution {
+    public int minimumTotal(List<List<Integer>> triangle) {
+        int[] minPath = new int[triangle.size()];
+        minPath[0] = triangle.get(0).get(0);
+        int min = 0;
+        if(triangle.size()==1){
+            return minPath[0];
+        }
+        for(int i=1;i<triangle.size();i++){
+            List<Integer> tri = triangle.get(i);
+            min = Integer.MAX_VALUE;
+            for(int j=i;j>=0;j--){
+                if(j==0)
+                    minPath[j] = minPath[j]+tri.get(j);
+                else if(j==i)
+                    minPath[j] = minPath[j-1]+ tri.get(j);
+                else{
+                    minPath[j] = Math.min(minPath[j-1], minPath[j])+tri.get(j);
+                }
+                if(min>minPath[j])
+                    min = minPath[j];
+            }   
+        }
+        return min;
+    }
+}
